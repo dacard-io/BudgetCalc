@@ -1,0 +1,20 @@
+Colors and Styling:
+
+Font: Roboto (The sizes on photoshop aren't correct)
+Title text color: #999999
+Table title color: #666666
+Table row text color: #666666
+Income table title background color: #66ff66
+Income table row background color: #ccffcc
+Income table amount color: #009900
+Savings table title background color: #99ccff
+Savings table row background color: #ccffff
+Savings table amount color: #003366
+Expenses table title background color: #ff9999
+Expenses table row background color: #ffcccc
+Expenses table amount color: #990000
+Budget table title background color: #ffcc33
+Budget table row background color: #ffff99
+Budget table amount color: #333300
+UI icons (Plus and minus symbols): #666666
+UI borders: #cccccc
