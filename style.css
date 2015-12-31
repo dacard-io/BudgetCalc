@@ -45,17 +45,24 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     float: left;
     top:30px;
 }
-#amount-input-income {
+#income-salary {
     color: #009900;
 }
-#amount-input-savings {
+#income-amount {
+    color: #009900;
+}
+#savings-amount {
     color: #003366;
 }
-#amount-input-expenses {
+#emergency-savings-amount {
+    color: #003366;
+}
+#expense-amount {
     color: #990000;
 }
-#amount-input-budget {
+.budget-amount {
     color: darkgoldenrod;
+    background-color: white;
 }
 /* Typography/Formatting */
 html {
@@ -129,6 +136,15 @@ table tr {
     font-size: 16px; 
     color: #666666;
     width: 60%;
+    /* Disable user selection highlighting */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Make sure cursor doesn't change */
+    cursor: default;
 }
 #table-caption-income {
     height: 40px;
@@ -136,6 +152,15 @@ table tr {
     background-color: #66ff66;
     font-size: 22px;
     font-weight: 400;
+    /* Disable user selection highlighting */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Make sure cursor doesn't change */
+    cursor: default;
 }
 .table-income tr {
     height: 40px;
@@ -150,6 +175,15 @@ table tr {
     height: 40px;
     color: #666666;
     background-color: #99ccff;
+    /* Disable user selection highlighting */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Make sure cursor doesn't change */
+    cursor: default;
 }
 .table-savings tr {
     height: 40px;
@@ -164,6 +198,15 @@ table tr {
     height: 40px;
     color: #666666;
     background-color: #ff9999;
+    /* Disable user selection highlighting */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Make sure cursor doesn't change */
+    cursor: default;
 }
 .table-expenses tr {
     height: 40px;
@@ -183,6 +226,15 @@ table tr {
     height: 40px;
     color: #666666;
     background-color: #ffcc33;
+    /* Disable user selection highlighting */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Make sure cursor doesn't change */
+    cursor: default;
 }
 
 /* Style UI */

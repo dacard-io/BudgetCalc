@@ -1,7 +1,9 @@
 <!-- BudgetCalc Project >> A minimal and comprehensive budget calculator with the ability
      Version 1             to make calculations for  monthly income, savings and expenses
 
-     * TO-DO:
+     * TO-DO FOR VERSION 2:
+        - Clean up Javascript/HTML/CSS, and remove duplicate IDs!
+        - Add dynamic adding and deleting of income, savings and expenses (code has been commented out)
         - Add animations
         - Make it completely responsive
         - Create an android app or mobile page later
@@ -24,7 +26,6 @@
         <link rel="stylesheet" href="style.css">
         <!--Load scripts/libraries-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="js/main.js"></script>
     </head>
     <body>
         <div class="header">
@@ -33,36 +34,37 @@
         </div>
         <div class="body">
             <table class="table-income">
-                <caption id="table-caption-income"><input type='submit' alt='Add extra income' id='add-button' value="+" onclick="AddIncome()"><p class="table-caption-text">Income</p></caption>
+                <caption id="table-caption-income"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+" onclick="addRow_Income()">--><p class="table-caption-text">Income</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
                 <col style="width:60%">
                 <col style="width:25%">
-                <tr><td id="data-description">Pay/Wage (Per week)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="income-salary" type="number" max="999999999" placeholder="0" step="0.01" onblur="calculateSalary()"></td></tr>            </table>
+                <tr name="income_row"><td id="data-description">Pay/Wage (Per week)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="income-salary" type="number" max="999999999" placeholder="0" step="0.01" onblur="calculateSalary()"></td></tr>            </table>
             <table class="table-savings">
-                <caption id="table-caption-savings"><input type='submit' alt='Add extra income' id='add-button' value="+"><p class="table-caption-text">Savings</p></caption>
+                <caption id="table-caption-savings"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+">--><p class="table-caption-text">Savings</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
                 <col style="width:60%">
                 <col style="width:25%">
-                <tr><td id="data-description">General Savings<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="savings-amount" onblur="calculateGeneralSavings()" type="number" max="999999999" placeholder="0" step="0.01"></td></tr>
-                <tr><td id="data-description">Emergency Fund<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="emergency-savings-amount" onblur="calculateEmergencyFunds()" type="number" max="999999999" placeholder="0" step="0.01"></td></tr>
+                <tr name="savings_row"><td id="data-description">General Savings<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="savings-amount" onblur="calculateGeneralSavings()" type="number" max="999999999" placeholder="0" step="0.01"></td></tr>
+                <tr name="savings_row"><td id="data-description">Emergency Fund<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="emergency-savings-amount" onblur="calculateEmergencyFunds()" type="number" max="999999999" placeholder="0" step="0.01"></td></tr>
             </table>
             <table class="table-expenses">
-                <caption id="table-caption-expenses"><input type='submit' alt='Add extra income' id='add-button' value="+" onclick="AddExpense()"><p class="table-caption-text">Expenses</p></caption>
+                <caption id="table-caption-expenses"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+" onclick="AddExpense()">--><p class="table-caption-text">Expenses</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
                 <col style="width:60%">
                 <col style="width:25%">
-                <tr><td id="data-description">Housing (Rent, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Household (Utilities, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr> 
-                <tr><td id="data-description">Cellphone Billl<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>                <tr><td id="data-description">Food/Groceries<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="amount-input-expenses" name="expenses" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Entertainment<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Health (Doctor visits, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Car Insurance<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Car Payments<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Personal (Hobbies, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
-                <tr><td id="data-description">Clothing (shoes, jewelry, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><form><input id="expense-amount" onblur="calculateExpenses()" type="number" max="999999999" placeholder="0" value="$" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Housing (Rent, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Household (Utilities, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr> 
+                <tr name="expense_row"><td id="data-description">Cellphone Bill<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>                
+                <tr name="expense_row"><td id="data-description">Food/Groceries<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Entertainment<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Health (Doctor visits, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Car Insurance<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Car Payments<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Personal (Hobbies, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description">Clothing (shoes, jewelry, etc.)<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" id="expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
 
             </table>
             <table class="table-budget">
@@ -71,15 +73,18 @@
                 <col style="width:15%">
                 <col style="width:60%">
                 <col style="width:25%">
-                <tr><td id="data-description">Annual Salary<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="budget-salary" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
-                <tr><td id="data-description">Monthly Income<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="budget-income" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
-                <tr><td id="data-description">Annual General Savings<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="budget-savings" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
-                <tr><td id="data-description">Annual Emergency Funds<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="budget-emergency-funds" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
-                <tr><td id="data-description">Monthly Expenses<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="budget-expenses" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>            
-                <tr><td id="data-description">Budget (Under/Over)<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="budget-total" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
+                <tr name="budget_row"><td id="data-description">Annual Salary<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-salary" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
+                <tr name="budget_row"><td id="data-description">Monthly Income<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-income" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
+                <tr name="budget_row"><td id="data-description">Annual General Savings<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-savings" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
+                <tr name="budget_row"><td id="data-description">Annual Emergency Funds<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-emergency-funds" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
+                <tr name="budget_row"><td id="data-description">Monthly Expenses<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-expenses" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>            
+                <tr name="budget_row"><td id="data-description">Budget (Under/Over)<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-total" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
             </table>
         </div>
         <div class="footer">
         </div>
+        <!-- Load main script at the end of the document to allow the DOM to load -->
+        <script src="js/main.js"></script>
+        <!-- ADD IN VERSION 2 <script src="js/animations.js"></script>-->
     </body>
 </html>
