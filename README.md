@@ -1,10 +1,12 @@
-# BudgetCalc (Version 1)
+# BudgetCalc
 A simple no-frills budget calculator. Calculate your income, savings contributions, and expenses to have a quick overview of your budget.
-Version 1 is extremely basic but is functional. 
 
-**Features to be added in version 2:**
+**Added Features:**
 * Animations
-* Dynamic adding and removing of income, savings, and expenses
-* Complete responsivness and a mobile web app
-* An email and print page function
+* Complete responsivness
 * A graph on the right side of the page
+
+**Features to be added later:**
+* Dynamic adding and removing of income, savings, and expenses
+* A mobile web app
+* An email and print page function
