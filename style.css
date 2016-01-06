@@ -57,7 +57,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 #emergency-savings-amount {
     color: #003366;
 }
-#expense-amount {
+.expense-amount {
     color: #990000;
 }
 .budget-amount {
@@ -83,15 +83,19 @@ h1 {
 .header {
     position: relative;
     width: 100%;
-    height: 80px;
+    height: 70px;
 }
 #header-logo {
     position: relative;
-    float: left;
-    left: 10px;
+    float: right;
+    right: 20px;
     top: 10px;
     font-size: 40px;
     font-weight: 300;
+    color: #999999;
+}
+#header-logo a {
+    text-decoration: none;
     color: #999999;
 }
 #header-logo-subtitle {
@@ -107,9 +111,59 @@ h1 {
 /* Body styling, tables etc. */
 .body {
     position: relative;
+    width: 50%;
+    height: auto;
+    float: left;
+}
+/* Style graphing area */
+#canvas-holder {
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    vertical-align: middle;
+    right:  2%;
+}
+.chart-legend {
+    position: fixed;
+    height: 80px;
+    width: 50%;
+    margin: 10px;
+    height: auto;
+    right: 10px;
+    bottom: 10px;
+}
+.chart-legend li {
+    /*display: block;
+    width: auto;
+    list-style: none;
+    width: 150px;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-top: 5px;*/
+    display: inline-block;
+    padding-left: 30px;
+    position: relative;
+    height: 17px;
+    font-size: 13px;
+    margin-bottom: 4px;
+    padding: 0px 80px 10px 30px;
+}
+.chart-legend li span{
+    /*display: inline-block;
+    position: relative;
+    width: 18px;
+    margin: 0px 10px 0px 10px;
+    margin-bottom: 4px;
+    height: 18px;
+    margin-right: 5px;*/
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: auto;
-    margin: 0 auto;
+    padding: 7px;
+    border-radius: 5px;
 }
 /* Change styling of table tag */
 table {
@@ -143,8 +197,8 @@ table tr {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    /* Make sure cursor doesn't change */
-    cursor: default;
+    /* Change cursor */
+    cursor: pointer;
 }
 #table-caption-income {
     height: 40px;
@@ -248,4 +302,68 @@ table tr {
     background: none;
     color: #666666;
     font-size: 35px;
+}
+
+/* CSS Tooltips! */
+[tooltip]:before {            
+    position : absolute;
+    content : attr(tooltip);
+    opacity : 0;
+}
+[tooltip]:after {            
+    position : absolute;
+    content : attr(tooltip);
+    opacity : 0;
+}
+[tooltip]:hover:before {        
+    opacity : 1;
+    background: #333;
+    background: rgba(0,0,0,.3);
+    border-radius: 3px;
+    width: auto;
+    bottom: 36px;
+    color: #fff;
+    padding: 0 10px 0 10px;
+    transition: opacity 0.5s linear;
+}
+[tooltip]:hover:after {        
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+/* Responsive CSS below - when screen resolution less than 960, change layout */
+@media all and (max-width: 960px){
+    /* Unfortunately for Chrome in Android, the scrollbar disapperars when scrolling
+       down the content, creating whitespace momentarily at the bottom of the page. In
+       So I would rather give it a flat background color to make it faster on mobile,
+       and to avoid any strange behavior from mobile browsers.
+    */
+    .body {
+        position: relative;
+        width: 100%;
+        height: auto;
+        float: none;
+    }
+    #header-logo {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: 10px;
+    font-size: 40px;
+    font-weight: 300;
+    color: #999999;
+    }
+    #header-logo-subtitle {
+    display: none;
+}
+    #canvas-holder {
+        display: none;
+    }
+    #chart-area {
+        display: none;
+    }
+    .chart-legend {
+        display: none;
+    }
 }
