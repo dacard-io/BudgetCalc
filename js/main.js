@@ -117,8 +117,9 @@ var doughnutData = [
     document.getElementById('js-legend').innerHTML = myDoughnut.generateLegend();
 /**************************************************************************************************/
 function calculateSalary() {
-    document.getElementById("budget-salary").value = (document.getElementById("income-salary").value * 4) * 12;
-    document.getElementById("budget-income").value = document.getElementById("income-salary").value * 4;
+    // So I've been calculating salary incorrectly my whole life haha.
+    document.getElementById("budget-salary").value = document.getElementById("income-salary").value * 12;
+    document.getElementById("budget-income").value = document.getElementById("income-salary").value;
     // Recalculate budget_sum
     calculateBudget();
     // Recalculate circle graph

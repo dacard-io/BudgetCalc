@@ -22,6 +22,8 @@
         <meta name="author" content="David Cardoso">
         <meta name="description" content="BudgetCalc - The simple and comprehensive budget calculator">
         <meta name="keywords" content="budget, calculator, expense, income, report, week, month, year, weekly, monthly, yearly">
+        <!-- Remove default zoom for mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
         <!--Load favicon-->
         <link rel="icon" type="image/png" href="favicon.png"/>
         <!--Load Stylesheet-->
@@ -40,22 +42,31 @@
         </script>
         <!--Load scripts/libraries-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <!--Load share buttons -->
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">stLight.options({publisher: "917dfbbd-bfa3-458c-bdd5-5a6f8678f5d4", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
     </head>
     <body>
         <div class="header">
             <h1 id="header-logo"><a href="index.html">BudgetCalc</a></h1>
             <p id="header-logo-subtitle">by <a href="http://davidcardoso.org">David Cardoso</a></p>
+            <div class="share-buttons">
+                <span class='st_reddit_hcount' displayText='Reddit'></span>
+                <span class='st_facebook_hcount' displayText='Facebook'></span>
+                <span class='st_twitter_hcount' displayText='Tweet'></span>
+                <span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+            </div>
         </div>
         <div class="body">
             <table class="table-income">
-                <caption id="table-caption-income"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+" onclick="addRow_Income()">--><p class="table-caption-text">Income</p></caption>
+                <caption id="table-caption-income"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+" onclick="addRow_Income()">--><p class="table-caption-text">Monthly Income</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
                 <col style="width:60%">
                 <col style="width:25%">
-                <tr name="income_row"><td id="data-description" tooltip="Your weekly paycheck">Pay/Wage<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="income-salary" type="number" max="999999999" placeholder="0" step="0.01" onblur="calculateSalary()"></td></tr>            </table>
+                <tr name="income_row"><td id="data-description">Pay/Wage<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="income-salary" type="number" max="999999999" placeholder="0" step="0.01" onblur="calculateSalary()"></td></tr>            </table>
             <table class="table-savings">
-                <caption id="table-caption-savings"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+">--><p class="table-caption-text">Savings</p></caption>
+                <caption id="table-caption-savings"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+">--><p class="table-caption-text">Monthly Savings</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
                 <col style="width:60%">
@@ -64,25 +75,23 @@
                 <tr name="savings_row"><td id="data-description">Emergency Fund<p align="right" style="float:right">$</p></td><td id="data-amount"><input id="emergency-savings-amount" onblur="calculateEmergencyFunds()" type="number" max="999999999" placeholder="0" step="0.01"></td></tr>
             </table>
             <table class="table-expenses">
-                <caption id="table-caption-expenses"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+" onclick="AddExpense()">--><p class="table-caption-text">Expenses</p></caption>
+                <caption id="table-caption-expenses"><!-- ADD IN VERSION 2 LATER!<input type='submit' alt='Add extra income' id='add-button' value="+" onclick="AddExpense()">--><p class="table-caption-text">Monthly Expenses</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
                 <col style="width:60%">
                 <col style="width:25%">
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly rent, mortgage payments, HOA expenses, etc.">Housing<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="housing-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly utilities, lights, electricity, etc.">Household<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="household-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr> 
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly cellphone bill, and service provider payments">Cellphone<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="cellphone-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>                
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly food expenses including groceries, and eating out">Food<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="food-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly leisure expenses such as movie tickets, theme parks, etc.">Entertainment<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="entertainment-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly health insurance, doctor visits, medication, etc.">Health<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="health-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly car insurance payments">Car Insurance<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="carinsurance-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly vehicle finance payments">Car Payments<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="carpayments-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly gas payments for vehicle">Gas<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="gas-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly personal expenses which include hobbies, or other uncategorized expenses">Personal<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="personal-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-                <tr name="expense_row"><td id="data-description" tooltip="Monthly shopping expenses including clothing, shoes, jewelry, etc.">Shopping<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="clothing-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
-
-            </table>
-            <table class="table-budget">
+                <tr name="expense_row"><td id="data-description" tooltip="Rent, mortgage payments, HOA expenses, etc.">Housing<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="housing-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Utilities, lights, electricity, etc.">Household<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="household-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr> 
+                <tr name="expense_row"><td id="data-description" tooltip="Cellphone bill, and service provider payments">Cellphone<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="cellphone-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>                
+                <tr name="expense_row"><td id="data-description" tooltip="Food expenses including groceries, and eating out">Food<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="food-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Leisure expenses such as movie tickets, theme parks, etc.">Entertainment<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="entertainment-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Health insurance, doctor visits, medication, etc.">Health<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="health-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Car insurance payments">Car Insurance<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="carinsurance-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Vehicle finance payments">Car Payments<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="carpayments-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Gas payments for vehicle">Gas<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="gas-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Personal expenses which include hobbies, or other uncategorized expenses">Personal<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="personal-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <tr name="expense_row"><td id="data-description" tooltip="Shopping expenses including clothing, shoes, jewelry, etc.">Shopping<p align="right" style="float:right">$</p></td><td id="data-amount"><input name="expense" class="expense-amount" id="clothing-expense-amount" onblur="calculateExpenses()" type="number" placeholder="0" step="0.01"></td></tr>
+                <table class="table-budget">
                 <caption id="table-caption-budget"><p class="table-caption-text">Budget</p></caption>
                 <!-- Set column widths-->
                 <col style="width:15%">
@@ -94,6 +103,7 @@
                 <tr name="budget_row"><td id="data-description">Annual Emergency Funds<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-emergency-funds" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
                 <tr name="budget_row"><td id="data-description">Monthly Expenses<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-expenses" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>            
                 <tr name="budget_row"><td id="data-description" tooltip="Your budget under/over">Budget<p align="right" style="float:right">$</p></td><td id="data-amount"><input class="budget-amount" id="budget-total" type="number" max="999999999" placeholder="0" step="0.01" disabled></td></tr>
+            </table>
             </table>
         </div>
         <div id="canvas-holder">
